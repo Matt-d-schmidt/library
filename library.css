@@ -327,12 +327,16 @@ main {
 .card ul {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 1.5rem;
     justify-content: center;
     align-items: flex-start;
     width: 100%;
     padding: 0;
     margin: 1rem 0;
+    box-sizing: border-box;
+    max-width: 100%;
+    overflow-wrap: anywhere;
 }
 
 .card ul li {
