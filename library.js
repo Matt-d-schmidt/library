@@ -130,9 +130,9 @@ class Library {
 
             let butContainer = document.createElement("div");
             butContainer.classList.add("remove-but-container");
-            let removeBookBut = document.createElement("button");
             let toggleReadBut = document.createElement("button");
 
+            // Set up toggleReadBut before using it
             if (book.read === "read") {
                 toggleReadBut.textContent = "not read";
                 toggleReadBut.classList.add("not-read-but");
