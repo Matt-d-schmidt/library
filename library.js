@@ -87,7 +87,7 @@ class Library {
             cardRead.classList.add("card-read");
             // Add book icon at the top
             let cardIcon = document.createElement("img");
-            cardIcon.src = "images/book-open-page-variant.svg";
+            cardIcon.src = "Library/images/book-open-page-variant.svg";
             cardIcon.alt = "Book icon";
             cardIcon.classList.add("card-icon");
             // Append everything in the correct order so all content is inside the card
@@ -108,7 +108,7 @@ class Library {
             closeBtn.classList.add("close");
             closeBtn.setAttribute("aria-label", "Close");
             let closeIcon = document.createElement("img");
-            closeIcon.src = "images/remove.svg";
+            closeIcon.src = "Library/images/remove.svg";
             closeIcon.alt = "close";
             closeIcon.classList.add("close-icon");
             closeBtn.appendChild(closeIcon);
