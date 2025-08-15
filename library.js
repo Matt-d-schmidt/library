@@ -130,7 +130,6 @@ class Library {
 
             let butContainer = document.createElement("div");
             butContainer.classList.add("remove-but-container");
-            let removeBookBut = document.createElement("button");
             let toggleReadBut = document.createElement("button");
 
             // Set up toggleReadBut before using it
@@ -156,11 +155,6 @@ class Library {
             cardDiv.appendChild(butContainer);
             butContainer.appendChild(removeBookBut);
             butContainer.appendChild(toggleReadBut);
-
-            removeBookBut.addEventListener("click", () => {
-                myLibrary.#books.splice(index, 1);
-                bookList.removeChild(cardDiv);
-            });
 
             toggleReadBut.addEventListener("click", () => {
                 book.toggleReadStatus();
