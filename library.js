@@ -2,7 +2,7 @@
 
 let cardContainer = document.querySelector(".container");
 let newBookButton = document.querySelector(".add");
-let dialog = document.querySelector("dialog");
+let dialog = document.querySelector(".form");
 let cancelButton = document.querySelector(".close");
 let addBookButton = document.querySelector(".submit");
 let titleInput = document.querySelector("#title");
@@ -172,13 +172,15 @@ class Library {
 }
 
 
+
 newBookButton.addEventListener("click", () => {
-    dialog.showModal();
+    dialog.classList.add("open");
     clearDialog();
 });
 
+
 cancelButton.addEventListener("click", () => {
-    dialog.close();
+    dialog.classList.remove("open");
 });
 
 function clearDialog() {
@@ -190,12 +192,12 @@ function clearDialog() {
 
 // Use form submit event for adding book
 let bookForm = document.querySelector(".book-form");
-bookForm.addEventListener("submit", (e) => {
+bookForm.addEventListener("submit", function (e) {
     e.preventDefault();
     let statusRadio = document.querySelector("input[name='status']:checked");
     myLibrary.addBookToLibrary(titleInput.value, authorInput.value, pagesInput.value, statusRadio.value, 0);
     myLibrary.displayBooks();
-    dialog.close();
+    dialog.classList.remove("open");
 });
 
 
