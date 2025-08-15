@@ -204,7 +204,7 @@ let bookForm = document.querySelector(".book-form");
 bookForm.addEventListener("submit", function (e) {
     e.preventDefault();
     let statusRadio = document.querySelector("input[name='status']:checked");
-    myLibrary.addBookToLibrary(titleInput.value, authorInput.value, pagesInput.value, statusRadio.value, 0);
+    myLibrary.addBookToLibrary(titleInput.value, authorInput.value, pagesInput.value, statusRadio.value);
     myLibrary.displayBooks();
     dialog.classList.remove("open");
 });
