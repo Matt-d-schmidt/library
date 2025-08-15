@@ -80,9 +80,15 @@ class Library {
         oldCards.forEach(card => card.remove());
 
         this.#books.forEach((book, index) => {
+
             let cardDiv = document.createElement("div");
             cardDiv.classList.add("card");
-            let cardIcon = document.createElement("div");
+            // Add book icon at the top
+            let cardIcon = document.createElement("img");
+            cardIcon.src = "images/book-open-page-variant.svg";
+            cardIcon.alt = "Book icon";
+            cardIcon.classList.add("card-icon");
+            cardDiv.appendChild(cardIcon);
 
             // Create a list to hold book info
             let cardList = document.createElement("ul");
@@ -105,12 +111,25 @@ class Library {
             let readHeader = document.createElement("li");
             readHeader.textContent = "Status: ";
 
+            // Add close button (top right, with SVG icon)
+            let closeBtn = document.createElement("button");
+            closeBtn.classList.add("close");
+            closeBtn.setAttribute("aria-label", "Close");
+            let closeIcon = document.createElement("img");
+            closeIcon.src = "images/remove.svg";
+            closeIcon.alt = "close";
+            closeIcon.classList.add("close-icon");
+            closeBtn.appendChild(closeIcon);
+            cardDiv.appendChild(closeBtn);
+
+            closeBtn.addEventListener("click", () => {
+                myLibrary.#books.splice(index, 1);
+                bookList.removeChild(cardDiv);
+            });
+
             let butContainer = document.createElement("div");
             butContainer.classList.add("remove-but-container");
             let removeBookBut = document.createElement("button");
-            removeBookBut.textContent = "Remove";
-            removeBookBut.classList.add("remove-but");
-            let toggleReadBut = document.createElement("button");
 
             if (book.read === "read") {
                 toggleReadBut.textContent = "not read";
