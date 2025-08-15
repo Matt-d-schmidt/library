@@ -153,7 +153,6 @@ class Library {
             cardList.appendChild(readHeader);
             readHeader.appendChild(readText);
             cardDiv.appendChild(butContainer);
-            butContainer.appendChild(removeBookBut);
             butContainer.appendChild(toggleReadBut);
 
             toggleReadBut.addEventListener("click", () => {
