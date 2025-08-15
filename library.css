@@ -344,4 +344,10 @@ main {
     flex-direction: column;
     align-items: flex-start;
     min-width: 80px;
+    font-weight: bold;
+    align-content: center;
+}
+
+.card ul li p {
+    font-weight: normal;
 }
