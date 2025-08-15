@@ -77,7 +77,7 @@ class Library {
         const oldCards = bookList.querySelectorAll('.card');
         const oldCardsRead = bookList.querySelectorAll('.card-read');
         oldCards.forEach(card => card.remove());
-        oldCardsRead.forEach(card => card.remove());
+        oldCardsRead.forEach(card => cardRead.remove());
 
         this.#books.forEach((book, index) => {
 
