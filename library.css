@@ -432,3 +432,12 @@ main {
 .card ul li p {
     font-weight: normal;
 }
+
+.submit {
+    transition: 0.3s;
+}
+
+.submit:hover {
+    transform: scale(1.1);
+    transition: 0.3s;
+}
