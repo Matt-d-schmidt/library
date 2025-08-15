@@ -1,7 +1,7 @@
 /* setting variables */
 
-let cardcontainer = document.getElementById("container");
-let newBookButton = document.getElementById("add");
+let cardcontainer = document.querySelector(".container");
+let newBookButton = document.querySelector(".add");
 let dialog = document.querySelector("dialog");
 let cancelBut = document.querySelector(".close");
 let addBookBut = document.querySelector(".submit");
