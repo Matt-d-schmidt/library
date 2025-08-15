@@ -148,7 +148,7 @@ class Library {
 
                 removeBookBut.addEventListener("click", () => {
                     myLibrary.#books.splice(index, 1);
-                    cardContainer.removeChild(cardDiv);
+                    bookList.removeChild(cardDiv);
                 });
 
                 toggleReadBut.addEventListener("click", () => {
