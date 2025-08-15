@@ -114,11 +114,12 @@ class Library {
             });
 
             // Info list
-            let cardList = document.createElement("ul");
+            let cardList1 = document.createElement("ul");
             let titleText = document.createElement("p");
             titleText.textContent = book.title;
             let authorText = document.createElement("p");
             authorText.textContent = book.author;
+            let cardList2 = document.createElement("ul");
             let pagesText = document.createElement("p");
             pagesText.textContent = book.pages;
             let readText = document.createElement("p");
@@ -133,14 +134,15 @@ class Library {
             let readHeader = document.createElement("li");
             readHeader.textContent = "Status: ";
 
-            cardDiv.appendChild(cardList);
-            cardList.appendChild(titleHeader);
+            cardDiv.appendChild(cardList1);
+            cardList1.appendChild(titleHeader);
             titleHeader.appendChild(titleText);
-            cardList.appendChild(authorHeader);
+            cardList1.appendChild(authorHeader);
             authorHeader.appendChild(authorText);
-            cardList.appendChild(pagesHeader);
+            cardDiv.appendChild(cardList2);
+            cardList2.appendChild(pagesHeader);
             pagesHeader.appendChild(pagesText);
-            cardList.appendChild(readHeader);
+            cardList2.appendChild(readHeader);
             readHeader.appendChild(readText);
 
             // Toggle read button
