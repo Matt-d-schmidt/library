@@ -48,11 +48,9 @@ class Book {
         this.#read = value;
     }
 
-    toggleReadStatus() {
-        if (this.#read === "read") {
-            this.#read = "not read yet";
-        } else {
-            this.#read = "read";
+    setStatus(status) {
+        if (["read", "not read yet", "currently reading"].includes(status)) {
+            this.#read = status;
         }
     }
 }
@@ -145,33 +143,49 @@ class Library {
             cardList2.appendChild(readHeader);
             readHeader.appendChild(readText);
 
-            // Toggle read button
+
+            // Status buttons
             let butContainer = document.createElement("div");
             butContainer.classList.add("remove-but-container");
-            let toggleReadBut = document.createElement("button");
-            if (book.read === "read") {
-                toggleReadBut.textContent = "not read";
-                toggleReadBut.classList.add("not-read-but");
-            } else {
-                toggleReadBut.textContent = "read";
-                toggleReadBut.classList.add("read-but");
-            }
-            cardDiv.appendChild(butContainer);
-            butContainer.appendChild(toggleReadBut);
 
-            toggleReadBut.addEventListener("click", () => {
-                book.toggleReadStatus();
+            let readBut = document.createElement("button");
+            readBut.textContent = "Read";
+            readBut.classList.add("read-but");
+            let notReadBut = document.createElement("button");
+            notReadBut.textContent = "Not Read";
+            notReadBut.classList.add("not-read-but");
+            let currentlyReadingBut = document.createElement("button");
+            currentlyReadingBut.textContent = "Currently Reading";
+            currentlyReadingBut.classList.add("currently-reading-but");
+
+            // Set active button style
+            function updateStatusButtons() {
+                readBut.classList.toggle("active", book.read === "read");
+                notReadBut.classList.toggle("active", book.read === "not read yet");
+                currentlyReadingBut.classList.toggle("active", book.read === "currently reading");
+            }
+            updateStatusButtons();
+
+            readBut.addEventListener("click", () => {
+                book.setStatus("read");
                 readText.textContent = book.read;
-                if (book.read === "read") {
-                    toggleReadBut.textContent = "not read";
-                    toggleReadBut.classList.add("not-read-but");
-                    toggleReadBut.classList.remove("read-but");
-                } else {
-                    toggleReadBut.textContent = "read";
-                    toggleReadBut.classList.add("read-but");
-                    toggleReadBut.classList.remove("not-read-but");
-                }
+                updateStatusButtons();
             });
+            notReadBut.addEventListener("click", () => {
+                book.setStatus("not read yet");
+                readText.textContent = book.read;
+                updateStatusButtons();
+            });
+            currentlyReadingBut.addEventListener("click", () => {
+                book.setStatus("currently reading");
+                readText.textContent = book.read;
+                updateStatusButtons();
+            });
+
+            cardDiv.appendChild(butContainer);
+            butContainer.appendChild(readBut);
+            butContainer.appendChild(notReadBut);
+            butContainer.appendChild(currentlyReadingBut);
 
             // Finally, append the card to the list
             bookList.appendChild(cardDiv);

@@ -272,28 +272,52 @@ main {
     margin-top: 0.5rem;
 }
 
-.read-but,
+.not-read-but {
+    margin-top: 0.5rem;
+}
+
+.read-but[data-status="no"] {
+    background-color: rgba(255, 255, 255, 1);
+    color: var(--color-text-primary);
+    border: 1px solid var(--inherit-outline-border);
+}
+
+.read-but:hover[data-status="no"] {
+    background-color: var(--inherit-outline-hover-bg);
+    color: var(--inherit-outline-hover-text);
+    border: 1px solid var(--inherit-outline-hover-border);
+}
+
+.read-but[data-status="yes"] {
+    background-color: var(--success-bg);
+    color: var(--success-text);
+    border: 1px solid var(--success-bg);
+}
+
+.read-but:hover[data-status="yes"] {
+    background-color: var(--success-bg-hover);
+    color: var(--success-text);
+    border: 1px solid var(--success-bg-hover);
+}
+
 .not-read-but[data-status="no"] {
     background-color: rgba(255, 255, 255, 1);
     color: var(--color-text-primary);
     border: 1px solid var(--inherit-outline-border);
 }
 
-.read-but,
 .not-read-but:hover[data-status="no"] {
     background-color: var(--inherit-outline-hover-bg);
     color: var(--inherit-outline-hover-text);
     border: 1px solid var(--inherit-outline-hover-border);
 }
 
-.read-but,
 .not-read-but[data-status="yes"] {
     background-color: var(--success-bg);
     color: var(--success-text);
     border: 1px solid var(--success-bg);
 }
 
-.read-but,
 .not-read-but:hover[data-status="yes"] {
     background-color: var(--success-bg-hover);
     color: var(--success-text);
