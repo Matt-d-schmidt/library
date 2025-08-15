@@ -87,7 +87,6 @@ class Library {
             let cardIcon = document.createElement("img");
             cardIcon.src = "images/book-open-page-variant.svg";
             cardIcon.alt = "Book icon";
-            cardIcon.textContent = "thumbnail-container";
             cardIcon.classList.add("card-icon");
             // Append everything in the correct order so all content is inside the card
             // 1. Add book icon
