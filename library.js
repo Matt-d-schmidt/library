@@ -89,11 +89,33 @@ class Library {
             cardIcon.alt = "Book icon";
             cardIcon.textContent = "thumbnail-container";
             cardIcon.classList.add("card-icon");
+            // Append everything in the correct order so all content is inside the card
+            // 1. Add book icon
+            // 2. Add close button
+            // 3. Add info list
+            // 4. Add toggle button
+
+            // Book icon
             cardDiv.appendChild(cardIcon);
 
-            // Create a list to hold book info
-            let cardList = document.createElement("ul");
+            // Close button (top right, with SVG icon)
+            let closeBtn = document.createElement("button");
+            closeBtn.classList.add("close");
+            closeBtn.setAttribute("aria-label", "Close");
+            let closeIcon = document.createElement("img");
+            closeIcon.src = "images/remove.svg";
+            closeIcon.alt = "close";
+            closeIcon.classList.add("close-icon");
+            closeBtn.appendChild(closeIcon);
+            cardDiv.appendChild(closeBtn);
 
+            closeBtn.addEventListener("click", () => {
+                myLibrary.#books.splice(index, 1);
+                bookList.removeChild(cardDiv);
+            });
+
+            // Info list
+            let cardList = document.createElement("ul");
             let titleText = document.createElement("p");
             titleText.textContent = book.title;
             let authorText = document.createElement("p");
@@ -112,38 +134,6 @@ class Library {
             let readHeader = document.createElement("li");
             readHeader.textContent = "Status: ";
 
-            // Add close button (top right, with SVG icon)
-            let closeBtn = document.createElement("button");
-            closeBtn.classList.add("close");
-            closeBtn.setAttribute("aria-label", "Close");
-            let closeIcon = document.createElement("img");
-            closeIcon.src = "images/remove.svg";
-            closeIcon.alt = "close";
-            closeIcon.classList.add("close-icon");
-            closeBtn.appendChild(closeIcon);
-            cardDiv.appendChild(closeBtn);
-
-            closeBtn.addEventListener("click", () => {
-                myLibrary.#books.splice(index, 1);
-                bookList.removeChild(cardDiv);
-            });
-
-
-            let butContainer = document.createElement("div");
-            butContainer.classList.add("remove-but-container");
-            let toggleReadBut = document.createElement("button");
-
-            // Set up toggleReadBut before using it
-            if (book.read === "read") {
-                toggleReadBut.textContent = "not read";
-                toggleReadBut.classList.add("not-read-but");
-            } else {
-                toggleReadBut.textContent = "read";
-                toggleReadBut.classList.add("read-but");
-            }
-
-            bookList.appendChild(cardDiv);
-            cardDiv.appendChild(cardIcon);
             cardDiv.appendChild(cardList);
             cardList.appendChild(titleHeader);
             titleHeader.appendChild(titleText);
@@ -153,13 +143,24 @@ class Library {
             pagesHeader.appendChild(pagesText);
             cardList.appendChild(readHeader);
             readHeader.appendChild(readText);
+
+            // Toggle read button
+            let butContainer = document.createElement("div");
+            butContainer.classList.add("remove-but-container");
+            let toggleReadBut = document.createElement("button");
+            if (book.read === "read") {
+                toggleReadBut.textContent = "not read";
+                toggleReadBut.classList.add("not-read-but");
+            } else {
+                toggleReadBut.textContent = "read";
+                toggleReadBut.classList.add("read-but");
+            }
             cardDiv.appendChild(butContainer);
             butContainer.appendChild(toggleReadBut);
 
             toggleReadBut.addEventListener("click", () => {
                 book.toggleReadStatus();
                 readText.textContent = book.read;
-
                 if (book.read === "read") {
                     toggleReadBut.textContent = "not read";
                     toggleReadBut.classList.add("not-read-but");
@@ -170,6 +171,9 @@ class Library {
                     toggleReadBut.classList.remove("not-read-but");
                 }
             });
+
+            // Finally, append the card to the list
+            bookList.appendChild(cardDiv);
         });
     }
 
