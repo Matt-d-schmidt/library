@@ -75,7 +75,9 @@ class Library {
     displayBooks() {
         // Remove old cards before displaying
         const oldCards = bookList.querySelectorAll('.card');
+        const oldCardsRead = bookList.querySelectorAll('.card-read');
         oldCards.forEach(card => card.remove());
+        oldCardsRead.forEach(card => card.remove());
 
         this.#books.forEach((book, index) => {
 
@@ -110,6 +112,24 @@ class Library {
             closeIcon.alt = "close";
             closeIcon.classList.add("close-icon");
             closeBtn.appendChild(closeIcon);
+
+            if (book.read === "read") {
+                cardRead.appendChild(closeBtn);
+            } else {
+                cardDiv.appendChild(closeBtn);
+            }
+
+            if (book.read === "read") {
+                closeBtn.addEventListener("click", () => {
+                    myLibrary.#books.splice(index, 1);
+                    bookList.removeChild(cardRead);
+                });
+            } else {
+                closeBtn.addEventListener("click", () => {
+                    myLibrary.#books.splice(index, 1);
+                    bookList.removeChild(cardDiv);
+                });
+            }
 
             if (book.read === "read") {
                 cardRead.appendChild(closeBtn);
@@ -194,16 +214,19 @@ class Library {
                 book.setStatus("read");
                 readText.textContent = book.read;
                 updateStatusButtons();
+                myLibrary.displayBooks(); // Refresh the display to show the book in the read section
             });
             notReadBut.addEventListener("click", () => {
                 book.setStatus("not read yet");
                 readText.textContent = book.read;
                 updateStatusButtons();
+                myLibrary.displayBooks(); // Refresh the display to show the book in the not read section
             });
             currentlyReadingBut.addEventListener("click", () => {
                 book.setStatus("currently reading");
                 readText.textContent = book.read;
                 updateStatusButtons();
+                myLibrary.displayBooks(); // Refresh the display to show the book in the currently reading section
             });
 
             if (book.read === "read") {
