@@ -80,7 +80,9 @@ class Library {
         this.#books.forEach((book, index) => {
 
             let cardDiv = document.createElement("div");
+            let cardRead = document.createElement("div");
             cardDiv.classList.add("card");
+            cardRead.classList.add("card-read");
             // Add book icon at the top
             let cardIcon = document.createElement("img");
             cardIcon.src = "images/book-open-page-variant.svg";
@@ -93,7 +95,11 @@ class Library {
             // 4. Add toggle button
 
             // Book icon
-            cardDiv.appendChild(cardIcon);
+            if (book.read === "read") {
+                cardRead.appendChild(cardIcon);
+            } else {
+                cardDiv.appendChild(cardIcon);
+            }
 
             // Close button (top right, with SVG icon)
             let closeBtn = document.createElement("button");
@@ -104,7 +110,12 @@ class Library {
             closeIcon.alt = "close";
             closeIcon.classList.add("close-icon");
             closeBtn.appendChild(closeIcon);
-            cardDiv.appendChild(closeBtn);
+
+            if (book.read === "read") {
+                cardRead.appendChild(closeBtn);
+            } else {
+                cardDiv.appendChild(closeBtn);
+            }
 
             closeBtn.addEventListener("click", () => {
                 myLibrary.#books.splice(index, 1);
@@ -132,16 +143,29 @@ class Library {
             let readHeader = document.createElement("li");
             readHeader.textContent = "Status: ";
 
-            cardDiv.appendChild(cardList1);
-            cardList1.appendChild(titleHeader);
-            titleHeader.appendChild(titleText);
-            cardList1.appendChild(authorHeader);
-            authorHeader.appendChild(authorText);
-            cardDiv.appendChild(cardList2);
-            cardList2.appendChild(pagesHeader);
-            pagesHeader.appendChild(pagesText);
-            cardList2.appendChild(readHeader);
-            readHeader.appendChild(readText);
+            if (book.read === "read") {
+                cardRead.appendChild(cardList1);
+                cardList1.appendChild(titleHeader);
+                titleHeader.appendChild(titleText);
+                cardList1.appendChild(authorHeader);
+                authorHeader.appendChild(authorText);
+                cardRead.appendChild(cardList2);
+                cardList2.appendChild(pagesHeader);
+                pagesHeader.appendChild(pagesText);
+                cardList2.appendChild(readHeader);
+                readHeader.appendChild(readText);
+            } else {
+                cardDiv.appendChild(cardList1);
+                cardList1.appendChild(titleHeader);
+                titleHeader.appendChild(titleText);
+                cardList1.appendChild(authorHeader);
+                authorHeader.appendChild(authorText);
+                cardDiv.appendChild(cardList2);
+                cardList2.appendChild(pagesHeader);
+                pagesHeader.appendChild(pagesText);
+                cardList2.appendChild(readHeader);
+                readHeader.appendChild(readText);
+            }
 
 
             // Status buttons
@@ -182,13 +206,24 @@ class Library {
                 updateStatusButtons();
             });
 
-            cardDiv.appendChild(butContainer);
-            butContainer.appendChild(readBut);
-            butContainer.appendChild(notReadBut);
-            butContainer.appendChild(currentlyReadingBut);
+            if (book.read === "read") {
+                cardRead.appendChild(butContainer);
+                butContainer.appendChild(readBut);
+                butContainer.appendChild(notReadBut);
+                butContainer.appendChild(currentlyReadingBut);
+            } else {
+                cardDiv.appendChild(butContainer);
+                butContainer.appendChild(readBut);
+                butContainer.appendChild(notReadBut);
+                butContainer.appendChild(currentlyReadingBut);
+            }
 
             // Finally, append the card to the list
-            bookList.appendChild(cardDiv);
+            if (book.read === "read") {
+                bookList.appendChild(cardRead);
+            } else {
+                bookList.appendChild(cardDiv);
+            }
         });
     }
 

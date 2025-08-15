@@ -265,6 +265,25 @@ main {
     transition: 0.3s;
 }
 
+.card-read {
+    background-color: rgb(255, 87, 87);
+    border: 1px solid var(--color-text-primary);
+    border-radius: 0.5rem;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.card-read:hover {
+    box-shadow: 0.5rem 0.5rem 0 0 var(--primary-bg);
+    transition: 0.3s;
+}
+
 .card-icon {
     position: relative;
     height: 200px;
@@ -433,11 +452,47 @@ main {
     font-weight: normal;
 }
 
+.card-read ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: auto;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    padding: 0;
+    margin: 1rem 0;
+    box-sizing: border-box;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+}
+
+.card-read ul li {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 80px;
+    font-weight: bold;
+    align-content: center;
+}
+
+.card-read ul li p {
+    font-weight: normal;
+}
+
 .submit {
+    margin-top: 0.5rem;
+    background-color: rgba(255, 255, 255, 1);
+    color: var(--color-text-primary);
+    border: 1px solid var(--inherit-outline-border);
     transition: 0.3s;
 }
 
 .submit:hover {
     transform: scale(1.1);
+    margin-top: 0.5rem;
+    background-color: rgba(255, 255, 255, 1);
+    color: var(--color-text-primary);
+    border: 1px solid var(--inherit-outline-border);
     transition: 0.3s;
 }
