@@ -127,9 +127,11 @@ class Library {
                 bookList.removeChild(cardDiv);
             });
 
+
             let butContainer = document.createElement("div");
             butContainer.classList.add("remove-but-container");
             let removeBookBut = document.createElement("button");
+            let toggleReadBut = document.createElement("button");
 
             if (book.read === "read") {
                 toggleReadBut.textContent = "not read";
