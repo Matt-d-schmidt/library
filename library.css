@@ -87,6 +87,8 @@ img {
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 0.5rem;
     font-weight: bold;
+    transition: 0.3s;
+    transform: scale(1.1);
 }
 
 .container {
@@ -122,11 +124,14 @@ main {
     color: var(--primary-text);
     border: 1px solid var(--color-text-primary);
     font-weight: bold;
+    transition: 0.3s;
 }
 
 .add:hover {
     background-color: var(--primary-bg-hover);
     color: var(--primary-text);
+    transition: 0.3s;
+    transform: scale(1.1);
 }
 
 /* New Book Form */
@@ -165,10 +170,13 @@ main {
     background-color: transparent;
     border: none;
     border-radius: 50%;
+    transition: 0.3s;
 }
 
 .close:hover {
     background: var(--inherit-outline-hover-bg);
+    transition: 0.3s;
+    transform: scale(1.1);
 }
 
 .close-icon {
@@ -215,10 +223,12 @@ main {
     justify-content: center;
     background: transparent;
     z-index: 1;
+    transition: 0.3s;
 }
 
 .remove:hover {
     background: rgba(255, 255, 255, 0.16);
+    transition: 0.3s;
 }
 
 .remove-icon {
@@ -247,10 +257,12 @@ main {
     padding: 10px;
     justify-content: center;
     align-items: center;
+    transition: 0.3s;
 }
 
 .card:hover {
     box-shadow: 0.5rem 0.5rem 0 0 var(--primary-bg);
+    transition: 0.3s;
 }
 
 .card-icon {
@@ -264,64 +276,103 @@ main {
 
 /* Read button */
 
-.read-but {
-    margin-top: 0.5rem;
+.remove-but-container {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
-.current-read-but {
+.read-but {
     margin-top: 0.5rem;
+    background-color: rgba(255, 255, 255, 1);
+    color: var(--color-text-primary);
+    border: 1px solid var(--inherit-outline-border);
+    transition: 0.3s;
+}
+
+.read-but:hover {
+    background-color: var(--inherit-outline-hover-bg);
+    color: var(--inherit-outline-hover-text);
+    border: 1px solid var(--inherit-outline-hover-border);
+    transform: scale(1.1);
+    transition: 0.3s;
+}
+
+.read-but.active {
+    background-color: var(--success-bg);
+    color: var(--success-text);
+    border: 1px solid var(--success-bg);
+    transition: 0.3s;
+}
+
+.read-but:hover.active {
+    background-color: var(--success-bg-hover);
+    color: var(--success-text);
+    border: 1px solid var(--success-bg-hover);
+    transition: 0.3s;
+    transform: scale(1.1);
 }
 
 .not-read-but {
     margin-top: 0.5rem;
-}
-
-.read-but[data-status="no"] {
     background-color: rgba(255, 255, 255, 1);
     color: var(--color-text-primary);
     border: 1px solid var(--inherit-outline-border);
+    transition: 0.3s;
 }
 
-.read-but:hover[data-status="no"] {
+.not-read-but:hover {
     background-color: var(--inherit-outline-hover-bg);
     color: var(--inherit-outline-hover-text);
     border: 1px solid var(--inherit-outline-hover-border);
+    transform: scale(1.1);
+    transition: 0.3s;
 }
 
-.read-but[data-status="yes"] {
+.not-read-but.active {
     background-color: var(--success-bg);
     color: var(--success-text);
     border: 1px solid var(--success-bg);
+    transition: 0.3s;
 }
 
-.read-but:hover[data-status="yes"] {
+.not-read-but:hover.active {
     background-color: var(--success-bg-hover);
     color: var(--success-text);
     border: 1px solid var(--success-bg-hover);
+    transition: 0.3s;
+    transform: scale(1.1);
 }
 
-.not-read-but[data-status="no"] {
+.currently-reading-but {
+    margin-top: 0.5rem;
     background-color: rgba(255, 255, 255, 1);
     color: var(--color-text-primary);
     border: 1px solid var(--inherit-outline-border);
+    transition: 0.3s;
 }
 
-.not-read-but:hover[data-status="no"] {
+.currently-reading-but:hover {
     background-color: var(--inherit-outline-hover-bg);
     color: var(--inherit-outline-hover-text);
     border: 1px solid var(--inherit-outline-hover-border);
+    transition: 0.3s;
+    transform: scale(1.1);
 }
 
-.not-read-but[data-status="yes"] {
+.currently-reading-but.active {
     background-color: var(--success-bg);
     color: var(--success-text);
     border: 1px solid var(--success-bg);
+    transition: 0.3s;
 }
 
-.not-read-but:hover[data-status="yes"] {
+.currently-reading-but:hover.active {
     background-color: var(--success-bg-hover);
     color: var(--success-text);
     border: 1px solid var(--success-bg-hover);
+    transition: 0.3s;
+    transform: scale(1.1);
 }
 
 .submit-but {
@@ -329,11 +380,14 @@ main {
     color: var(--primary-text);
     border: 1px solid var(--color-text-primary);
     font-weight: bold;
+    transition: 0.3s;
 }
 
 .submit-but:hover {
     background-color: var(--primary-bg-hover);
     color: var(--primary-text);
+    transition: 0.3s;
+    transform: scale(1.1);
 }
 
 .remove-but {
@@ -341,11 +395,14 @@ main {
     color: var(--primary-text);
     border: 1px solid var(--color-text-primary);
     font-weight: bold;
+    transition: 0.3s;
 }
 
 .remove-but:hover {
     background-color: var(--primary-bg-hover);
     color: var(--primary-text);
+    transition: 0.3s;
+    transform: scale(1.1);
 }
 
 .card ul {
