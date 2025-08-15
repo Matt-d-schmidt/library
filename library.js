@@ -1,6 +1,7 @@
 /* setting variables */
 
 let cardContainer = document.querySelector(".container");
+let bookList = document.querySelector(".list");
 let newBookButton = document.querySelector(".add");
 let dialog = document.querySelector(".form");
 let cancelButton = document.querySelector(".close");
@@ -130,7 +131,7 @@ class Library {
                     toggleReadBut.classList.add("read-but");
                 }
 
-                cardContainer.appendChild(cardDiv);
+                bookList.appendChild(cardDiv);
                 cardDiv.appendChild(cardIcon);
                 cardDiv.appendChild(cardList);
                 cardList.appendChild(titleHeader);
