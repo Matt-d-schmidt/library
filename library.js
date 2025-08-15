@@ -73,16 +73,24 @@ class Library {
     }
 
     displayBooks() {
+
         // Remove old cards before displaying
         const oldCards = bookList.querySelectorAll('.card');
         const oldCardsRead = bookList.querySelectorAll('.card-read');
+        oldCardsRead.forEach(cardRead => cardRead.remove());
         oldCards.forEach(card => card.remove());
-        oldCardsRead.forEach(card => cardRead.remove());
 
         this.#books.forEach((book, index) => {
 
             let cardDiv = document.createElement("div");
             let cardRead = document.createElement("div");
+
+            if (book.read === "read") {
+                bookList.appendChild(cardRead);
+            } else {
+                bookList.appendChild(cardDiv);
+            }
+
             cardDiv.classList.add("card");
             cardRead.classList.add("card-read");
             // Add book icon at the top
@@ -130,17 +138,6 @@ class Library {
                     bookList.removeChild(cardDiv);
                 });
             }
-
-            if (book.read === "read") {
-                cardRead.appendChild(closeBtn);
-            } else {
-                cardDiv.appendChild(closeBtn);
-            }
-
-            closeBtn.addEventListener("click", () => {
-                myLibrary.#books.splice(index, 1);
-                bookList.removeChild(cardDiv);
-            });
 
             // Info list
             let cardList1 = document.createElement("ul");
@@ -241,12 +238,6 @@ class Library {
                 butContainer.appendChild(currentlyReadingBut);
             }
 
-            // Finally, append the card to the list
-            if (book.read === "read") {
-                bookList.appendChild(cardRead);
-            } else {
-                bookList.appendChild(cardDiv);
-            }
         });
     }
 
