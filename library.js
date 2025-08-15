@@ -1,10 +1,10 @@
 /* setting variables */
 
-let cardcontainer = document.querySelector(".container");
+let cardContainer = document.querySelector(".container");
 let newBookButton = document.querySelector(".add");
 let dialog = document.querySelector("dialog");
-let cancelBut = document.querySelector(".close");
-let addBookBut = document.querySelector(".submit");
+let cancelButton = document.querySelector(".close");
+let addBookButton = document.querySelector(".submit");
 let titleInput = document.querySelector("#title");
 let authorInput = document.querySelector("#author");
 let pagesInput = document.querySelector("#pages");
@@ -84,11 +84,18 @@ class Library {
     }
 
     displayBooks() {
+        // Remove old cards before displaying
+        const oldCards = cardContainer.querySelectorAll('.card');
+        oldCards.forEach(card => card.remove());
+
         this.#books.forEach((book, index) => {
             if (book.displayStatus !== 1) {
                 let cardDiv = document.createElement("div");
-                cardDiv.classList.toggle("card");
+                cardDiv.classList.add("card");
                 let cardIcon = document.createElement("div");
+
+                // Create a list to hold book info
+                let cardList = document.createElement("ul");
 
                 let titleText = document.createElement("p");
                 titleText.textContent = book.title;
@@ -109,18 +116,18 @@ class Library {
                 readHeader.textContent = "Status: ";
 
                 let butContainer = document.createElement("div");
-                butContainer.classList.toggle("remove-but-container");
+                butContainer.classList.add("remove-but-container");
                 let removeBookBut = document.createElement("button");
                 removeBookBut.textContent = "Remove";
-                removeBookBut.classList.toggle("remove-but");
+                removeBookBut.classList.add("remove-but");
                 let toggleReadBut = document.createElement("button");
 
                 if (book.read === "read") {
                     toggleReadBut.textContent = "not read";
-                    toggleReadBut.classList.toggle("not-read-but");
+                    toggleReadBut.classList.add("not-read-but");
                 } else {
                     toggleReadBut.textContent = "read";
-                    toggleReadBut.classList.toggle("read-but");
+                    toggleReadBut.classList.add("read-but");
                 }
 
                 cardContainer.appendChild(cardDiv);
@@ -149,12 +156,12 @@ class Library {
 
                     if (book.read === "read") {
                         toggleReadBut.textContent = "not read";
-                        toggleReadBut.classList.toggle("not-read-but");
-                        toggleReadBut.classList.toggle("read-but");
+                        toggleReadBut.classList.add("not-read-but");
+                        toggleReadBut.classList.remove("read-but");
                     } else {
                         toggleReadBut.textContent = "read";
-                        toggleReadBut.classList.toggle("read-but");
-                        toggleReadBut.classList.toggle("not-read-but");
+                        toggleReadBut.classList.add("read-but");
+                        toggleReadBut.classList.remove("not-read-but");
                     }
                 });
                 book.displayStatus = 1;
@@ -163,6 +170,7 @@ class Library {
     }
 
 }
+
 
 newBookButton.addEventListener("click", () => {
     dialog.showModal();
@@ -180,10 +188,14 @@ function clearDialog() {
     defaultRadio.checked = true;
 }
 
-addBookButton.addEventListener("click", () => {
+// Use form submit event for adding book
+let bookForm = document.querySelector(".book-form");
+bookForm.addEventListener("submit", (e) => {
+    e.preventDefault();
     let statusRadio = document.querySelector("input[name='status']:checked");
     myLibrary.addBookToLibrary(titleInput.value, authorInput.value, pagesInput.value, statusRadio.value, 0);
     myLibrary.displayBooks();
+    dialog.close();
 });
 
 
