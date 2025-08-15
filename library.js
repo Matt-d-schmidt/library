@@ -19,15 +19,13 @@ class Book {
     #author = "";
     #pages = 0;
     #read = "not read yet";
-    #displayStatus = 0;
 
-    constructor(title, author, pages, read, displayStatus) {
+    constructor(title, author, pages, read) {
         this.#id = crypto.randomUUID();
         this.#title = title;
         this.#author = author;
         this.#pages = pages;
         this.#read = read;
-        this.#displayStatus = displayStatus;
     }
 
     get title() {
@@ -46,16 +44,8 @@ class Book {
         return this.#read;
     }
 
-    get displayStatus() {
-        return this.#displayStatus;
-    }
-
     set read(value) {
         this.#read = value;
-    }
-
-    set displayStatus(value) {
-        this.#displayStatus = value;
     }
 
     toggleReadStatus() {
@@ -80,8 +70,8 @@ class Library {
         return this.#books;
     }
 
-    addBookToLibrary(title, author, pages, read, displayStatus) {
-        this.#books.push(new Book(title, author, pages, read, displayStatus));
+    addBookToLibrary(title, author, pages, read) {
+        this.#books.push(new Book(title, author, pages, read));
     }
 
     displayBooks() {
@@ -90,83 +80,80 @@ class Library {
         oldCards.forEach(card => card.remove());
 
         this.#books.forEach((book, index) => {
-            if (book.displayStatus !== 1) {
-                let cardDiv = document.createElement("div");
-                cardDiv.classList.add("card");
-                let cardIcon = document.createElement("div");
+            let cardDiv = document.createElement("div");
+            cardDiv.classList.add("card");
+            let cardIcon = document.createElement("div");
 
-                // Create a list to hold book info
-                let cardList = document.createElement("ul");
+            // Create a list to hold book info
+            let cardList = document.createElement("ul");
 
-                let titleText = document.createElement("p");
-                titleText.textContent = book.title;
-                let authorText = document.createElement("p");
-                authorText.textContent = book.author;
-                let pagesText = document.createElement("p");
-                pagesText.textContent = book.pages;
-                let readText = document.createElement("p");
+            let titleText = document.createElement("p");
+            titleText.textContent = book.title;
+            let authorText = document.createElement("p");
+            authorText.textContent = book.author;
+            let pagesText = document.createElement("p");
+            pagesText.textContent = book.pages;
+            let readText = document.createElement("p");
+            readText.textContent = book.read;
+
+            let titleHeader = document.createElement("li");
+            titleHeader.textContent = "Title: ";
+            let authorHeader = document.createElement("li");
+            authorHeader.textContent = "Author: ";
+            let pagesHeader = document.createElement("li");
+            pagesHeader.textContent = "Pages: ";
+            let readHeader = document.createElement("li");
+            readHeader.textContent = "Status: ";
+
+            let butContainer = document.createElement("div");
+            butContainer.classList.add("remove-but-container");
+            let removeBookBut = document.createElement("button");
+            removeBookBut.textContent = "Remove";
+            removeBookBut.classList.add("remove-but");
+            let toggleReadBut = document.createElement("button");
+
+            if (book.read === "read") {
+                toggleReadBut.textContent = "not read";
+                toggleReadBut.classList.add("not-read-but");
+            } else {
+                toggleReadBut.textContent = "read";
+                toggleReadBut.classList.add("read-but");
+            }
+
+            bookList.appendChild(cardDiv);
+            cardDiv.appendChild(cardIcon);
+            cardDiv.appendChild(cardList);
+            cardList.appendChild(titleHeader);
+            titleHeader.appendChild(titleText);
+            cardList.appendChild(authorHeader);
+            authorHeader.appendChild(authorText);
+            cardList.appendChild(pagesHeader);
+            pagesHeader.appendChild(pagesText);
+            cardList.appendChild(readHeader);
+            readHeader.appendChild(readText);
+            cardDiv.appendChild(butContainer);
+            butContainer.appendChild(removeBookBut);
+            butContainer.appendChild(toggleReadBut);
+
+            removeBookBut.addEventListener("click", () => {
+                myLibrary.#books.splice(index, 1);
+                bookList.removeChild(cardDiv);
+            });
+
+            toggleReadBut.addEventListener("click", () => {
+                book.toggleReadStatus();
                 readText.textContent = book.read;
-
-                let titleHeader = document.createElement("li");
-                titleHeader.textContent = "Title: ";
-                let authorHeader = document.createElement("li");
-                authorHeader.textContent = "Author: ";
-                let pagesHeader = document.createElement("li");
-                pagesHeader.textContent = "Pages: ";
-                let readHeader = document.createElement("li");
-                readHeader.textContent = "Status: ";
-
-                let butContainer = document.createElement("div");
-                butContainer.classList.add("remove-but-container");
-                let removeBookBut = document.createElement("button");
-                removeBookBut.textContent = "Remove";
-                removeBookBut.classList.add("remove-but");
-                let toggleReadBut = document.createElement("button");
 
                 if (book.read === "read") {
                     toggleReadBut.textContent = "not read";
                     toggleReadBut.classList.add("not-read-but");
+                    toggleReadBut.classList.remove("read-but");
                 } else {
                     toggleReadBut.textContent = "read";
                     toggleReadBut.classList.add("read-but");
+                    toggleReadBut.classList.remove("not-read-but");
                 }
-
-                bookList.appendChild(cardDiv);
-                cardDiv.appendChild(cardIcon);
-                cardDiv.appendChild(cardList);
-                cardList.appendChild(titleHeader);
-                titleHeader.appendChild(titleText);
-                cardList.appendChild(authorHeader);
-                authorHeader.appendChild(authorText);
-                cardList.appendChild(pagesHeader);
-                pagesHeader.appendChild(pagesText);
-                cardList.appendChild(readHeader);
-                readHeader.appendChild(readText);
-                cardDiv.appendChild(butContainer);
-                butContainer.appendChild(removeBookBut);
-                butContainer.appendChild(toggleReadBut);
-
-                removeBookBut.addEventListener("click", () => {
-                    myLibrary.#books.splice(index, 1);
-                    bookList.removeChild(cardDiv);
-                });
-
-                toggleReadBut.addEventListener("click", () => {
-                    book.toggleReadStatus();
-                    readText.textContent = book.read;
-
-                    if (book.read === "read") {
-                        toggleReadBut.textContent = "not read";
-                        toggleReadBut.classList.add("not-read-but");
-                        toggleReadBut.classList.remove("read-but");
-                    } else {
-                        toggleReadBut.textContent = "read";
-                        toggleReadBut.classList.add("read-but");
-                        toggleReadBut.classList.remove("not-read-but");
-                    }
-                });
-                book.displayStatus = 1;
-            }
+            });
         });
     }
 
@@ -203,8 +190,8 @@ bookForm.addEventListener("submit", function (e) {
 
 
 let myLibrary = new Library();
-myLibrary.addBookToLibrary("Mistborn", "Brandon Sanderson", 672, "not read yet", 0);
-myLibrary.addBookToLibrary("The Tower of Swallows", "Andrzej Sapkwoski", 464, "read", 0);
-myLibrary.addBookToLibrary("The Fellowship of the Ring", "JRR Tolkien", 531, "not read yet", 0);
-myLibrary.addBookToLibrary("Shoedog", "Phil Knight", 400, "read", 0);
+myLibrary.addBookToLibrary("Mistborn", "Brandon Sanderson", 672, "not read yet");
+myLibrary.addBookToLibrary("The Tower of Swallows", "Andrzej Sapkwoski", 464, "read");
+myLibrary.addBookToLibrary("The Fellowship of the Ring", "JRR Tolkien", 531, "not read yet");
+myLibrary.addBookToLibrary("Shoedog", "Phil Knight", 400, "read");
 myLibrary.displayBooks();
