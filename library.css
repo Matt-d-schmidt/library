@@ -64,6 +64,11 @@ ul {
     gap: 1rem;
 }
 
+img {
+    width: 50%;
+    height: auto;
+}
+
 /* Navigation items */
 
 .nav-item {
