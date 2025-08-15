@@ -86,7 +86,7 @@ class Library {
 
     displayBooks() {
         // Remove old cards before displaying
-        const oldCards = cardContainer.querySelectorAll('.card');
+        const oldCards = bookList.querySelectorAll('.card');
         oldCards.forEach(card => card.remove());
 
         this.#books.forEach((book, index) => {
